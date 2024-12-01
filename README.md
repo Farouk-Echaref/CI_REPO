@@ -1,5 +1,7 @@
 # CI_REPO
 
+![alt text](gitops_flow.png)
+
 A **Jenkinsfile** is a script that defines a CI/CD pipeline in Jenkins using either **Declarative** or **Scripted** syntax. The main components of a Jenkinsfile are outlined below, focusing on the most commonly used **Declarative Pipeline** syntax.
 
 ---
