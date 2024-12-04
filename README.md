@@ -209,3 +209,6 @@ pipeline {
 ```
 
 This structure ensures flexibility and modularity for CI/CD pipelines in Jenkins.
+
+* Jenkins course: 
+- https://www.youtube.com/watch?v=6YZvp2GwT0A&ab_channel=DevOpsJourney
