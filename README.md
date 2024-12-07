@@ -220,7 +220,7 @@ This structure ensures flexibility and modularity for CI/CD pipelines in Jenkins
 - https://devopscube.com/docker-containers-as-build-slaves-jenkins/
 
 
-```markdown
+
 # Docker Agent Templates in Jenkins
 
 **Docker Agent Templates** define reusable configurations for launching Docker containers as build agents in Jenkins. They enable dynamic, ephemeral agent creation for specific job requirements.
@@ -271,9 +271,6 @@ This pipeline uses the `maven-agent` template to spin up a container for the job
 4. Save and test by running a job.
 
 
-
-
-```markdown
 # Running Jenkins in the Background and Stopping It
 
 ## **1. Running Jenkins in the Background**
@@ -379,4 +376,3 @@ chmod +x start_jenkins.sh stop_jenkins.sh
 ### **Usage**
 - Start Jenkins: `./start_jenkins.sh`
 - Stop Jenkins: `./stop_jenkins.sh`
-```
