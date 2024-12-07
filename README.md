@@ -210,5 +210,64 @@ pipeline {
 
 This structure ensures flexibility and modularity for CI/CD pipelines in Jenkins.
 
+
+### Resources:
+
 * Jenkins course: 
 - https://www.youtube.com/watch?v=6YZvp2GwT0A&ab_channel=DevOpsJourney
+
+* configure docker agaent:
+- https://devopscube.com/docker-containers-as-build-slaves-jenkins/
+
+
+```markdown
+# Docker Agent Templates in Jenkins
+
+**Docker Agent Templates** define reusable configurations for launching Docker containers as build agents in Jenkins. They enable dynamic, ephemeral agent creation for specific job requirements.
+
+## Key Components
+1. **Docker Image**: Name of the Docker image to use (e.g., `maven:3.8.5-jdk-11`).
+2. **Labels**: Identifiers for jobs to match specific templates.
+3. **Remote File System Root**: Directory inside the container for Jenkins files (default: `/home/jenkins`).
+4. **Instance Cap**: Max concurrent containers for the template.
+5. **Volumes**: Host directories/files to mount in the container.
+6. **Environment Variables**: Custom variables (e.g., `JAVA_HOME`).
+7. **Additional Arguments**: Extra `docker run` options.
+8. **Pull Strategy**: When to pull the image (e.g., **Always**).
+9. **Network**: Docker network (e.g., `bridge`, `host`).
+10. **Idle Timeout**: Time before idle containers are terminated.
+11. **Expose DOCKER_HOST**: Enables container access to the Docker daemon.
+
+## Benefits
+- **Flexibility**: Different environments for different jobs.
+- **Isolation**: Avoid dependency conflicts.
+- **Scalability**: Dynamic agent provisioning.
+- **Reusability**: Simplified configuration management.
+
+## Example Pipeline
+```groovy
+pipeline {
+    agent {
+        docker {
+            label 'maven-agent'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+    }
+}
+```
+
+This pipeline uses the `maven-agent` template to spin up a container for the job and removes it post-completion.
+
+## Setup
+1. Go to **Manage Jenkins** > **Manage Nodes and Clouds** > **Configure Clouds**.
+2. Add a **Docker Cloud**.
+3. Create a new **Docker Agent Template** with the desired configuration.
+4. Save and test by running a job.
+
+```
