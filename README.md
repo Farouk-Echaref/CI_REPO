@@ -270,7 +270,7 @@ This pipeline uses the `maven-agent` template to spin up a container for the job
 3. Create a new **Docker Agent Template** with the desired configuration.
 4. Save and test by running a job.
 
-```
+
 
 
 ```markdown
