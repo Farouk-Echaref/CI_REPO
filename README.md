@@ -271,3 +271,112 @@ This pipeline uses the `maven-agent` template to spin up a container for the job
 4. Save and test by running a job.
 
 ```
+
+
+```markdown
+# Running Jenkins in the Background and Stopping It
+
+## **1. Running Jenkins in the Background**
+You can run Jenkins in the background using one of the following methods:
+
+### **Method 1: Use `nohup`**
+Run Jenkins in the background with `nohup` to ensure it continues running even if the terminal is closed:
+
+```bash
+nohup jenkins > jenkins.log 2>&1 &
+```
+
+- **Explanation**:
+  - `nohup`: Ignores the hangup signal (prevents termination when the terminal closes).
+  - `jenkins`: Launches Jenkins.
+  - `> jenkins.log`: Redirects output to a log file named `jenkins.log`.
+  - `2>&1`: Redirects error output to the same log file.
+  - `&`: Runs the command in the background.
+
+### **Method 2: Use `&` Only**
+If you don’t need `nohup`, append `&` to the command:
+
+```bash
+jenkins > jenkins.log 2>&1 &
+```
+
+**Note**: This process will stop if the terminal is closed unless you use tools like `tmux` or `screen`.
+
+---
+
+## **2. Stopping Jenkins**
+To stop Jenkins, you need to find its **Process ID (PID)** and terminate it.
+
+### **Step 1: Find the PID**
+Run the following command to locate Jenkins' PID:
+
+```bash
+ps aux | grep jenkins
+```
+
+Example output:
+
+```plaintext
+youruser   12345  0.0  1.2 123456 12345 ? S 10:00   0:00 java -jar /usr/share/jenkins/jenkins.war
+```
+
+- The first number (`12345`) is the **PID**.
+
+### **Step 2: Kill the Process**
+Terminate the Jenkins process using its PID:
+
+```bash
+kill 12345
+```
+
+If the process does not stop, forcefully kill it with:
+
+```bash
+kill -9 12345
+```
+
+---
+
+## **3. Verifying Jenkins is Stopped**
+Run the following to confirm Jenkins has stopped:
+
+```bash
+ps aux | grep jenkins
+```
+
+If no relevant output is shown, Jenkins is no longer running.
+
+---
+
+## **4. Automating with Scripts**
+You can create scripts to simplify starting and stopping Jenkins.
+
+### **Start Script (`start_jenkins.sh`)**
+```bash
+#!/bin/bash
+nohup jenkins > jenkins.log 2>&1 &
+echo "Jenkins started in the background. Logs are in jenkins.log."
+```
+
+### **Stop Script (`stop_jenkins.sh`)**
+```bash
+#!/bin/bash
+PID=$(ps aux | grep '[j]enkins' | awk '{print $2}')
+if [ -n "$PID" ]; then
+  kill "$PID"
+  echo "Jenkins stopped."
+else
+  echo "Jenkins is not running."
+fi
+```
+
+Make both scripts executable:
+
+```bash
+chmod +x start_jenkins.sh stop_jenkins.sh
+```
+
+### **Usage**
+- Start Jenkins: `./start_jenkins.sh`
+- Stop Jenkins: `./stop_jenkins.sh`
+```
