@@ -1,19 +1,17 @@
 pipeline {
-    agent{
+    agent {
         node {
             label 'docker_agent_python'
         }
     }
 
-    triggers{
+    triggers {
         pollSCM '*/1 * * * *'
     }
 
     environment {
         DOCKER_IMAGE = 'faroukcha69/ci_image'
     }
-
-    def app
 
     stages {
         stage('Clone repository') {
@@ -25,7 +23,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    app = docker.build("${DOCKER_IMAGE}")
+                    def app = docker.build("${DOCKER_IMAGE}") // Declare and initialize `app` here
                 }
             }
         }
@@ -33,7 +31,7 @@ pipeline {
         stage('Test image') {
             steps {
                 script {
-                    app.inside {
+                    app.inside { // Use `app` only inside the script block where it's declared
                         sh 'echo "Tests passed"'
                     }
                 }
