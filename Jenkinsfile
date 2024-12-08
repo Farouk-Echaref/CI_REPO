@@ -52,11 +52,11 @@ pipeline {
 
         stage('Trigger ManifestUpdate') {
             steps {
-                build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+                build job: 'cd_update_manifest_job', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
             }
         }
     }
-    
+
     post {
         always {
             echo 'Pipeline completed.'
