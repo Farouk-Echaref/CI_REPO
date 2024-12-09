@@ -71,11 +71,11 @@ pipeline {
         failure {
             echo 'Pipeline failed!'
         }
-        cleanup {
-            script {
-                // Optional cleanup logic, e.g., remove unused Docker images
-                sh 'docker image prune -f'
-            }
-        }
+        // cleanup {
+        //     script {
+        //         // Optional cleanup logic, e.g., remove unused Docker images
+        //         sh 'docker image prune -f'
+        //     }
+        // }
     }
 }
