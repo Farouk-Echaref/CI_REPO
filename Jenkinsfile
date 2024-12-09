@@ -5,6 +5,8 @@ pipeline {
     //     }
     // }
 
+    def app
+
     agent {
         node {
             label 'my-host-agent' // Use the label assigned in the configuration
