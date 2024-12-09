@@ -31,7 +31,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    def app = docker.build("${DOCKER_IMAGE}") // Declare and initialize `app` here
+                    app = docker.build("${DOCKER_IMAGE}") // Declare and initialize `app` here
                 }
             }
         }
