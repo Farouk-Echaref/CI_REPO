@@ -1,7 +1,13 @@
 pipeline {
+    // agent {
+    //     node {
+    //         label 'docker_agent_python'
+    //     }
+    // }
+
     agent {
         node {
-            label 'docker_agent_python'
+            label 'my-host-agent' // Use the label assigned in the configuration
         }
     }
 
