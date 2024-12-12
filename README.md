@@ -376,3 +376,10 @@ chmod +x start_jenkins.sh stop_jenkins.sh
 ### **Usage**
 - Start Jenkins: `./start_jenkins.sh`
 - Stop Jenkins: `./stop_jenkins.sh`
+
+
+### tmp docker comds:
+
+- docker rm -f $(docker ps -aq)    
+
+- Desktop docker rmi -f $(docker images -q)  
